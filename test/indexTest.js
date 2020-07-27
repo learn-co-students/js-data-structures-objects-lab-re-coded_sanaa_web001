@@ -1,68 +1,56 @@
-describe('drivers', function() {
-  describe('updateDriverWithKeyAndValue(driver, key, value)', function () {
-    beforeEach(function () {
-      for (const key in driver) {
-        delete driver[key];
-      }
+const farmAnimals = 'cow horse sheep pig chicken'
 
-      driver.name = 'Sam';
-    });
+const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
 
-    it('returns a driver with the original key value pairs and the new key value pair', function () {
-      expect(updateDriverWithKeyAndValue(driver, 'address', '11 Broadway')).to.eql({
-        name: 'Sam',
-        address: '11 Broadway'
-      });
-    });
+const muppet = {
+  name: 'Kermit',
+  color: 'green',
+  song: 'The Rainbow Connection',
+  job: 'Host of The Muppet Show',
+  partner: 'Miss Piggy'
+};
 
-    it('it does not modify the original driver, but rather returns a clone with the new data', function () {
-      updateDriverWithKeyAndValue(driver, 'address', '11 Broadway');
+const k_muppet = {
+  k_name: 'Kermit',
+  k_color: 'green',
+  k_album: {
+    the_muppet_movie: {
+      song_1: 'Rainbow Connection',
+      song_2: 'Moving Right Along',
+      song_3: 'Never Before, Never Again',
+      song_4: 'I Hope That Something Better Comes Along',
+    },
+  },
+  k_job: 'Host of The Muppet Show',
+  k_partner: 'Miss Piggy'
+};
 
-      expect(driver['address']).to.equal(undefined);
-    });
-  });
+// Strings
+// 1. Use destructuring to assign appropriate variables based on the sounds animals make.
+const [moo, neigh, baa, oink, cluck] = 'cow horse sheep pig chicken'.split(" ")
 
-  describe('destructivelyUpdateDriverWithKeyAndValue(driver, key, value)', function () {
-    it('updates `driver` with the given `key` and `value` (it is destructive) and returns the entire updated driver', function () {
-      expect(destructivelyUpdateDriverWithKeyAndValue(driver, 'address', '12 Broadway')).to.eql({
-        name: 'Sam',
-        address: '12 Broadway'
-      });
+// 2. Bolt the horse wandered off, so just give us four animals, and let's name them Bessie, Dolly, Babe, and Little.
+const [Bessie, , Dolly, Babe, Little] = 'cow horse sheep pig chicken'.split(" ")
 
-      expect(driver).to.eql({
-        name: 'Sam',
-        address: '12 Broadway'
-      });
-    });
-  });
+// 3. Little the chicken had to go back to the coop, so now we're left with three. Let's use color variables of black_and_white, black, and pink.
+const [black_and_white, , black, pink] = 'cow horse sheep pig chicken'.split(" ")
 
-  describe('deleteFromDriverByKey(driver, key)', function () {
-    it('deletes `key` from a clone of driver and returns the new driver (it is non-destructive)', function () {
-      let newdriver = deleteFromDriverByKey(driver, 'name');
+// Arrays
 
-      expect(newdriver['name']).to.equal(undefined);
-      expect(typeof newdriver).to.equal('object');
-    });
+// 4. Use destructuring to assign appropriate variables using the color names.
+const [red, orange, yellow, green, blue, indigo, violet] = colors
 
-    it('does not modify the original driver (it is non-destructive)', function () {
-      deleteFromDriverByKey(driver, 'name');
+// 5. Some people have a really hard time picking out indigo, so let's leave that one out, using the first letter of each color as the variable names.
+const [r, o, y, g, b, , v] = colors
 
-      expect(driver['name']).to.equal('Sam');
-    });
-  });
+// 6. But wait! Indigo is now feeling *super* left out. Let's only assign indigo using indg.
+const [ , , , , , indg, ] = colors
 
-  describe('destructivelyDeleteFromDriverByKey(driver, key)', function () {
-    it('returns driver without the delete key/value pair', function () {
-      let newdriver = destructivelyDeleteFromDriverByKey(driver, 'name');
+// Objects
 
-      expect(newdriver['name']).to.equal(undefined);
-    });
+// 7. Use destructuring to assign all appropriate variables using the keys as the variable names
+const { name, color, song, job, partner} = muppet
 
-    it('modifies the original driver', function () {
-      let newdriver = destructivelyDeleteFromDriverByKey(driver, 'name');
-
-      expect(driver['name']).to.equal(undefined);
-      expect(driver).to.equal(newdriver);
-    });
-  });
-});
+// 8. Use destructuring to assign songs 2 and 4, and Kermit's job and partner
+const { song_2, song_4} = k_muppet.k_album.the_muppet_movie
+const { k_color, k_job, k_partner } = k_muppet
